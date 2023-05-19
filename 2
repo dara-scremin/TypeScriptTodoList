@@ -1,0 +1,53 @@
+// TypeScript Todo List
+
+// Todo interface
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+// Todo class
+class TodoList {
+  private todos: Todo[] = [];
+
+  constructor() {}
+
+  // Add todo
+  addTodo(title: string): void {
+    const newTodo: Todo = {
+      id: this.todos.length + 1,
+      title,
+      completed: false,
+    };
+    this.todos.push(newTodo);
+  }
+
+  // Complete todo
+  completeTodoById(id: number): void {
+    const todo = this.todos.find((todo) => todo.id === id);
+    if (todo) {
+      todo.completed = true;
+    }
+  }
+
+  // List todos
+  listTodos(): void {
+    console.log('Todo List:');
+    this.todos.forEach((todo) => {
+      const status = todo.completed ? '[x]' : '[ ]';
+      console.log(`${status} ${todo.title}`);
+    });
+  }
+}
+
+// Usage example
+const todoList = new TodoList();
+
+todoList.addTodo('Buy groceries');
+todoList.addTodo('Finish homework');
+todoList.addTodo('Go for a run');
+
+todoList.completeTodoById(2);
+
+todoList.listTodos();
